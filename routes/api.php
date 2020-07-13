@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/tarefas','Api\TarefasController@index');
+
+
+Route::post('/auth/login', 'Api\AuthController@login');
