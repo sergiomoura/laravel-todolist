@@ -15,7 +15,7 @@ class TarefasController extends Controller
      */
     public function index()
     {
-        return response(Tarefa::all(),200);
+        return response(auth()->user()->tarefas,200);
     }
 
     /**

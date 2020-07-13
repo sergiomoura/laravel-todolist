@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tarefas','Api\TarefasController@index');
+Route::get('/tarefas','Api\TarefasController@index')->middleware('jwtauth');
 
 
 Route::post('/auth/login', 'Api\AuthController@login');
