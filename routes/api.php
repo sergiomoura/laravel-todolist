@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tarefas','Api\TarefasController@index')->middleware('jwtauth');
-
+Route::prefix('/tarefas')->middleware(['jwtauth'])->group(
+    function () {
+        Route::get('','Api\TarefasController@index');
+        Route::post('','Api\TarefasController@store');
+        Route::put('/{id}','Api\TarefasController@update');
+        Route::delete('/{id}','Api\TarefasController@destroy');
+    }
+);
 
 Route::post('/auth/login', 'Api\AuthController@login');
