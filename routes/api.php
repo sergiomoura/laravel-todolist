@@ -20,6 +20,8 @@ Route::prefix('/tarefas')->middleware(['jwtauth'])->group(
         Route::post('','Api\TarefasController@store');
         Route::put('/{id}','Api\TarefasController@update');
         Route::delete('/{id}','Api\TarefasController@destroy');
+        Route::patch('/{id}/feito','Api\TarefasController@setFeito');
+        Route::patch('/{id}/desfeito','Api\TarefasController@setDesfeito');
     }
 );
 

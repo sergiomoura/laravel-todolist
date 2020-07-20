@@ -40,4 +40,32 @@ class TarefasController extends Controller
         Tarefa::destroy($tarefa->id);
         return response()->json($tarefa);
     }
+
+    public function setFeito($id){
+
+        $tarefa = auth()->user()->tarefas()->find($id);
+        
+        if(!$tarefa){
+            return response(["error" => "Tarefa não encontrada"],404);
+        }
+
+        $tarefa->feito = 1;
+        $tarefa->save();
+
+        return response()->json($tarefa);
+    }
+
+    public function setDesfeito($id){
+
+        $tarefa = auth()->user()->tarefas()->find($id);
+        
+        if(!$tarefa){
+            return response(["error" => "Tarefa não encontrada"],404);
+        }
+
+        $tarefa->feito = 0;
+        $tarefa->save();
+        
+        return response()->json($tarefa);
+    }
 }
