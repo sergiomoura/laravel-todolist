@@ -13,18 +13,31 @@ class TarefasController extends Controller
     }
 
     public function store(Request $request){
-        auth()->user()->tarefas()->create(
-            [
-                'descricao' => $request->descricao
-            ]
-            );
+        $tarefa = auth()->user()->tarefas()->create(
+            ['descricao' => $request->descricao]
+        );
+        return response()->json($tarefa);
     }
 
     public function update(Request $request, $id){
-        return response()->json(['status'=>'update']);
+        
+        $tarefa = auth()->user()->tarefas()->find($id);
+        if($tarefa){
+            $tarefa->descricao = $request->descricao;
+            $tarefa->save();
+            return response()->json($tarefa);
+        }
+
     }
 
     public function destroy($id){
-        return response()->json(['status'=>'destroy']);
+        $tarefa = auth()->user()->tarefas()->find($id);
+        
+        if(!$tarefa){
+            return response(["error" => "Tarefa não encontrada"],404);
+        }
+
+        Tarefa::destroy($tarefa->id);
+        return response()->json($tarefa);
     }
 }
