@@ -1,28 +1,20 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-html{
-    background-color: black;
-    font-size: 24px;
+*{
+box-sizing: border-box;
+font-size: 18px;
+font-family: sans-serif;
+
+
 }
 
 body{
-    color: white;
-    font-family: Cabri, cursive;
-    width: 100%;
-    display: flex;
-    min-height: 100vh;
-    flex-wrap: wrap;
-    background-color: rgba(148, 0, 211, 0.7);
+margin: 0;
+padding: 0;
+background-color: black;
+color: white;
+padding: 30px;
 }
 
-li{
-    list-style: none; padding: 5px;
+main{
+display: none;
 } 
-
-main {
-    display: none;
-}
