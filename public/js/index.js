@@ -58,7 +58,18 @@ function mostrarTarefa(tarefa){
 
 }
 
+/**
+ * 
+ * Limpar a lista de tarefas antes de popula-la com as novas tarefas.
+ *  
+ */
 function mostrarTarefas(tarefas){
+
+    // Limpando a lista antes
+    let lista = document.querySelector("main ul.lista");
+    lista.innerText = '';
+
+    // Mostrando tarefas
     for(t of tarefas){
         mostrarTarefa(t);
     }

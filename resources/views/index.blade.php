@@ -24,22 +24,7 @@
             <button type="button">Salvar</button>
         </form>
         <ul class="lista">
-            <li>
-                <input type="checkbox">
-                <span>Pagar escolas</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Pagar escolas</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Pagar escolas</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Pagar escolas</span>
-            </li>
+            
         </ul>
     </main>
     
