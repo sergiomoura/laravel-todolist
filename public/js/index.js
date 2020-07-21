@@ -26,6 +26,8 @@ let tarefas = [
     }
 ];
 
+let token = null;
+
 function mostrarTarefa(tarefa){
     
     // Criar um li
@@ -81,10 +83,9 @@ function adicionarTarefa(texto){
     document.getElementById("descricao").value = '';
 }
 
-mostrarTarefas(tarefas);
 
-let button = document.querySelector('button');
-button.onclick = function(evt){
+let buttonAddTarefa = document.querySelector('#formulario button');
+buttonAddTarefa.onclick = function(evt){
     let texto = document.getElementById('descricao').value;
     adicionarTarefa(texto);
 }
@@ -114,4 +115,74 @@ input.onkeypress = function(evt){
 
     }
 }
+
+let buttonLogin = document.querySelector("#form-login button");
+buttonLogin.addEventListener('click', function(evt){
+    evt.preventDefault();
+    
+    // Caputurar conteúdo do campo email para var email
+    let email = document.getElementById('email').value;
+
+    // Caputurar conteúdo do campo password para var password
+    let password = document.getElementById('password').value;
+
+    let credenciais = {email:email, password:password}
+
+    // Construir os cabeçalhos da req
+    let headers = new Headers();
+    headers.append('Content-type','application/json');
+
+    // Enviar a req para o /api/auth/login usando o **fetch**
+    let promise = fetch('/api/auth/login',{
+        method:'post',
+        headers: headers,
+        body: JSON.stringify(credenciais)
+    })
+
+    promise.then(
+        function(response) {
+            if(!response.ok){
+                alert("Falha no login");
+                return;
+            }
+
+            return response.json();
+
+        }
+    ).then(
+        function(conteudoResposta) {
+            console.log(conteudoResposta);
+            token = conteudoResposta.access_token;
+            carregaTarefas();
+        }
+    )
+})
+
+function carregaTarefas(){
+
+    // Criar cabeçalhos
+    let headers = new Headers();
+    headers.append('Authorization','Bearer ' + token);
+
+    // Fazer a req get para /api/tarefas
+    fetch('/api/tarefas',{
+        method:'get',
+        headers: headers
+    }).then(
+        function(response){
+            return response.json();
+        }
+    ).then(
+        function(tarefas){
+            console.log(tarefas);
+            document.getElementById('main').style.display = "block";
+            mostrarTarefas(tarefas);
+        }
+    )
+
+    // console.log nas tarefas que chegarem
+
+}
+
+
 
